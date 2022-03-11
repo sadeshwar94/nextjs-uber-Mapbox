@@ -50,7 +50,7 @@ bg-white px-4
 `;
 
 const Backbutton = tw.img`
-h-12 transform hover:scale-125 duration-300 transition text-xl
+h-12 cursor-pointer
 `;
 
 const InputContainer = tw.div`
