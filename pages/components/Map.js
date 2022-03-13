@@ -14,14 +14,14 @@ const Map = () => {
       center: [135.5375, 34.794],
       zoom: 11.1,
     });
-    
+    addToMap(map);
   });
 
-const addToMap = () => {
-  const marker1 = new mapboxgl.Marker()
-  .setLngLat([135.5375, 34.794])
-  .addTo(map);
-}
+  const addToMap = (map) => {
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat([135.5375, 34.794])
+      .addTo(map);
+  };
 
   return <Wrapper id="map"></Wrapper>;
 };
