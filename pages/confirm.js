@@ -7,10 +7,10 @@ const confirm = () => {
   const [dropoffCordinates, setDropoffCoordinates] = useState();
 
   const getPickupCoordinates = () => {
-    const pickup = 'Santa Monica';
+    const pickup = 'Osaka';
     //JS fetch method
     fetch(
-      'https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?' +
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
         new URLSearchParams({
           access_token:
             'pk.eyJ1Ijoic2FkZXNod2FyIiwiYSI6ImNpeTUwcnNuMzAwNDQzM3FoMnRsdG94dWUifQ.aK-Xih6Lfrglfqwa9n6Z1A',
@@ -25,10 +25,10 @@ const confirm = () => {
   };
 
   const getDropoffCoordinates = () => {
-    const dropoff = 'Tokyo';
+    const dropoff = 'Osaka Suita';
     //JS fetch method
     fetch(
-      'https://api.mapbox.com/geocoding/v5/mapbox.places/${dropoff}.json?' +
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${dropoff}.json?` +
         new URLSearchParams({
           access_token:
             'pk.eyJ1Ijoic2FkZXNod2FyIiwiYSI6ImNpeTUwcnNuMzAwNDQzM3FoMnRsdG94dWUifQ.aK-Xih6Lfrglfqwa9n6Z1A',
@@ -38,7 +38,7 @@ const confirm = () => {
       .then((response) => response.json())
       .then((data) => {
         // console.log('Dropoff');
-        // console.log(data.features[0].center);
+        console.log(data.features[0].center);
         setDropoffCoordinates(data.features[0].center);
       });
   };
