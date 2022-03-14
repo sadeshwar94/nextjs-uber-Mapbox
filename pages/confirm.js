@@ -1,13 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import Map from './components/Map';
 
 const confirm = () => {
-  const getCoordinates = () => {
-    const location = 'Suita Osaka';
+  const [pickupCordinates, setPickupCoordinates] = useState();
+  const [dropoffCordinates, setDropoffCoordinates] = useState();
+
+  const getPickupCoordinates = () => {
+    const pickup = 'Santa Monica';
     //JS fetch method
     fetch(
-      'https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?' +
+      'https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?' +
+        new URLSearchParams({
+          access_token:
+            'pk.eyJ1Ijoic2FkZXNod2FyIiwiYSI6ImNpeTUwcnNuMzAwNDQzM3FoMnRsdG94dWUifQ.aK-Xih6Lfrglfqwa9n6Z1A',
+          limit: 3,
+        })
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data.features[0].center);
+        setPickupCoordinates(data.features[0].center);
+      });
+  };
+
+  const getDropoffCoordinates = () => {
+    const dropoff = 'Tokyo';
+    //JS fetch method
+    fetch(
+      'https://api.mapbox.com/geocoding/v5/mapbox.places/${dropoff}.json?' +
         new URLSearchParams({
           access_token:
             'pk.eyJ1Ijoic2FkZXNod2FyIiwiYSI6ImNpeTUwcnNuMzAwNDQzM3FoMnRsdG94dWUifQ.aK-Xih6Lfrglfqwa9n6Z1A',
@@ -16,18 +37,28 @@ const confirm = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log('Dropoff');
+        // console.log(data.features[0].center);
+        setDropoffCoordinates(data.features[0].center);
       });
   };
 
   useEffect(() => {
-    getCoordinates();
+    getPickupCoordinates();
+    getDropoffCoordinates();
   }, []);
 
   return (
     <Wrapper>
-      <Map />
-      <RideContainer>Ride Selector Confirm Button</RideContainer>
+      <Map
+        pickupCordinates={pickupCordinates}
+        dropoffCordinates={dropoffCordinates}
+      />
+      <RideContainer>
+        Ride Selector Confirm Button
+        {/* {pickupCordinates} */}
+        {/* {dropoffCordinates} */}
+      </RideContainer>
     </Wrapper>
   );
 };
