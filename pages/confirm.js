@@ -7,7 +7,7 @@ const confirm = () => {
   const [dropoffCordinates, setDropoffCoordinates] = useState();
 
   const getPickupCoordinates = () => {
-    const pickup = 'Osaka';
+    const pickup = 'Osaka Suita Kishibe';
     //JS fetch method
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
@@ -25,7 +25,7 @@ const confirm = () => {
   };
 
   const getDropoffCoordinates = () => {
-    const dropoff = 'Osaka Suita';
+    const dropoff = 'Osaka Suita Shojaku';
     //JS fetch method
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${dropoff}.json?` +
@@ -38,7 +38,7 @@ const confirm = () => {
       .then((response) => response.json())
       .then((data) => {
         // console.log('Dropoff');
-        console.log(data.features[0].center);
+        // console.log(data.features[0].center);
         setDropoffCoordinates(data.features[0].center);
       });
   };

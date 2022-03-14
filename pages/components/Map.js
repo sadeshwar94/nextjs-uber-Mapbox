@@ -16,12 +16,20 @@ const Map = (props) => {
       zoom: 10.1,
     });
     // addToMap(map);
+    //get two cordinates in the map
     if (props.pickupCordinates) {
       addToMap(map, props.pickupCordinates);
     }
 
     if (props.dropoffCordinates) {
       addToMap(map, props.dropoffCordinates);
+    }
+
+    if (props.pickupCordinates && props.dropoffCordinates) {
+      // auto zoom only for markers
+      map.fitBounds([props.dropoffCordinates, props.pickupCordinates], {
+        padding: 60,
+      });
     }
   }, [props.pickupCordinates, props.dropoffCordinates]);
 
