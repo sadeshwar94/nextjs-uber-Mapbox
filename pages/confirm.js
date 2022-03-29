@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import Map from './components/Map';
 import { useRouter } from 'next/router'
-
+import RideSelector from './components/RideSelector';
 
 const confirm = () => {
 
@@ -62,13 +62,12 @@ const confirm = () => {
         dropoffCordinates={dropoffCordinates}
       />
       <RideContainer>
-        <RideSelector>
-          Ride Selector
-        </RideSelector>
+        <RideSelector />
         <ConfirmButtonContainer>
-          Confirm UberX
-        </ConfirmButtonContainer>
-        
+          <ConfirmButton>
+            Confirm UberX
+          </ConfirmButton>        
+        </ConfirmButtonContainer>      
       </RideContainer>
     </Wrapper>
   );
@@ -76,14 +75,17 @@ const confirm = () => {
 
 export default confirm;
 
-const ConfirmButtonContainer = tw.div`
+const ConfirmButton = tw.div`
+bg-black text-white my-4 mx-4 py-4 text-center text-xl
 `
 
-const RideSelector = tw.div`
+const ConfirmButtonContainer = tw.div`
+border-t-2 
 `
 
 const RideContainer = tw.div`
-flex-1`;
+flex-1 flex flex-col h-1/2
+`;
 
 const Wrapper = tw.div`
 flex h-screen flex-col 
