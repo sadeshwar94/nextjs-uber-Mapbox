@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { userEffect } from 'react';
 import tw from 'tailwind-styled-components';
+import { useRouter } from 'next/router';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const Login = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/');
+      }
+    });
+  }, []);
+
   return (
     <Wrapper>
       <UberLogo src="https://i.ibb.co/n6LWQM4/Post.png" />
