@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 import { carList } from '../data/carList';
 
 const RideSelector = (props) => {
-  const [duration, setDuration] = useState(0);
+  const [rideDuration, setRideDuration] = useState(0);
 
   // get ride duration from MapBox API
   // 1. pickupCordinates
@@ -22,7 +22,7 @@ const RideSelector = (props) => {
       })
       .then((data) => {
         // console.log
-        setDuration(data.routes[0].duration);
+        setRideDuration(data.routes[0].rideDuration);
       });
   };
 
@@ -43,7 +43,8 @@ const RideSelector = (props) => {
               <ServiceName>{car.service}</ServiceName>
               <ServiceTime>5 Min Away</ServiceTime>
             </CarDetail>
-            <Price>${((duration / 100) * car.multiplier).toFixed(2)}</Price>
+            <Price>${((rideDuration / 100) * car.multiplier).toFixed(2)}</Price>
+            {/* <Price>{'$' + (rideDuration * car.multiplier).toFixed(2)}</Price> */}
           </Car>
         ))}
       </CarList>
