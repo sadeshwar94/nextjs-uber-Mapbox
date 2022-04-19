@@ -17,21 +17,21 @@ const Map = (props) => {
     });
     // addToMap(map);
     //get two cordinates in the map
-    if (props.pickupCordinates) {
-      addToMap(map, props.pickupCordinates);
+    if (props.pickUpCoordinates) {
+      addToMap(map, props.pickUpCoordinates);
     }
 
-    if (props.dropoffCordinates) {
-      addToMap(map, props.dropoffCordinates);
+    if (props.dropoffCoordinates) {
+      addToMap(map, props.dropoffCoordinates);
     }
 
-    if (props.pickupCordinates && props.dropoffCordinates) {
+    if (props.pickUpCoordinates && props.dropoffCoordinates) {
       // auto zoom only for markers
-      map.fitBounds([props.dropoffCordinates, props.pickupCordinates], {
+      map.fitBounds([props.dropoffCoordinates, props.pickUpCoordinates], {
         padding: 60,
       });
     }
-  }, [props.pickupCordinates, props.dropoffCordinates]);
+  }, [props.pickUpCoordinates, props.dropoffCoordinates]);
 
   const addToMap = (map, coordinates) => {
     const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map);

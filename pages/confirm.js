@@ -13,9 +13,9 @@ const confirm = () => {
         console.log("Dropoff", dropoff); */
 
   const [pickUpCoordinates, setPickupCoordinates] = useState();
-  const [dropoffCordinates, setDropoffCoordinates] = useState();
+  const [dropoffCoordinates, setDropoffCoordinates] = useState();
 
-  const getPickupCoordinates = (pickup) => {
+  const getPickUpCoordinates = (pickup) => {
     //JS fetch method
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${pickup}.json?` +
@@ -51,7 +51,7 @@ const confirm = () => {
   };
 
   useEffect(() => {
-    getPickupCoordinates(pickup);
+    getPickUpCoordinates(pickup);
     getDropoffCoordinates(dropoff);
   }, [pickup, dropoff]);
 
@@ -64,12 +64,12 @@ const confirm = () => {
       </ButtonContainer>
       <Map
         pickUpCoordinates={pickUpCoordinates}
-        dropoffCordinates={dropoffCordinates}
+        dropoffCoordinates={dropoffCoordinates}
       />
       <RideContainer>
         <RideSelector
           pickUpCoordinates={pickUpCoordinates}
-          dropoffCordinates={dropoffCordinates}
+          dropoffCoordinates={dropoffCoordinates}
         />
         <ConfirmButtonContainer>
           <ConfirmButton>Confirm UberX</ConfirmButton>
