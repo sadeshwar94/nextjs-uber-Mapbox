@@ -1,12 +1,32 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import tw from 'tailwind-styled-components';
 import Map from './components/Map';
 import Link from 'next/link';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
+      } else {
+        setUser(null);
+        router.push('/login');
+      }
+    });
+  }, []);
+
   return (
     <Wrapper>
       <Map />
@@ -16,8 +36,11 @@ export default function Home() {
           <UberLogo src="https://d1a3f4spazzrp4.cloudfront.net/uberex/duc/images/logos/Uber_Logotype_Digital_black.png" />
 
           <Profile>
-            <Name>Sadesh War </Name>
-            <UserImage src="https://lh3.googleusercontent.com/ogw/ADea4I6R5ml8aXasbQmd64TJAhczxmASNE1OCjXj9EZ2=s32-c-mo" />
+            <Name>{user && user.name}</Name>
+            <UserImage
+              src={user && user.photoUrl}
+              onClick={() => signOut(auth)}
+            />
           </Profile>
         </Header>
         {/* ActionButtons */}
@@ -67,11 +90,11 @@ flex items-center
 `;
 
 const Name = tw.div`
-mr-4 w-20 text-sm
+mr-12 w-20 text-sm
 `;
 
 const UserImage = tw.img`
-h-12 w-12 rounded-full border border-gray-200 p-px
+h-12 w-12 rounded-full border border-gray-200 p-px cursor-pointer
 `;
 
 const ActionButtons = tw.div`
